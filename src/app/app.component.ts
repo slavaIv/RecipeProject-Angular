@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'RecipeProject';
+
+    title = 'RecipeProject';
+    compToShow: string = "Recipes";
+
+
+    onLinkChosen(link) {
+        this.compToShow = link.target.text;
+    }
 }
