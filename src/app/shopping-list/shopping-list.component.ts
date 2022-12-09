@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Ingridient } from '../shared/ingridient.model';
+import { ShoppingListService } from './shopping-list.service';
 
 @Component({
   selector: 'app-shopping-list',
@@ -10,22 +11,20 @@ export class ShoppingListComponent implements OnInit {
 
     @Output() link = new EventEmitter<string>();
 
-    ingridients:Ingridient[] = [
-        new Ingridient("Apples", 7),
-        new Ingridient("Tomatoes", 3)
-    ];
+    ingridients: Ingridient[];
 
-    constructor() {}
+    constructor(private shoppingListService: ShoppingListService) {}
 
     onLinkChoose(event) {
         this.link.emit(event);
     }
 
-    onIngridientAdded(event: Ingridient) {
-        this.ingridients.push(event);
-    }
-
     ngOnInit(): void {
-        
+        this.ingridients = this.shoppingListService.getIngridients();
+        this.shoppingListService.ingridientsChanged.subscribe(
+            (ingridients: Ingridient[]) => {
+                this.ingridients = ingridients;
+            }
+        )
     }
 }
