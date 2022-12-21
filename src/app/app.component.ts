@@ -7,11 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-    title = 'RecipeProject';
-    compToShow: string = "Recipes";
-
-
-    onLinkChosen(link) {
-        this.compToShow = link.target.text;
-    }
 }
