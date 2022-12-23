@@ -1,41 +1,41 @@
 import { Subject } from "rxjs";
-import { Ingridient } from "../shared/ingridient.model";
+import { Ingredient } from "../shared/ingredient.model";
 
 export class ShoppingListService {
 
-    ingridientsChanged = new Subject<Ingridient[]>();
+    ingredientsChanged = new Subject<Ingredient[]>();
     startedEditing = new Subject<number>();
     
-    private ingridients:Ingridient[] = [
-        new Ingridient("Apples", 7),
-        new Ingridient("Tomatoes", 3)
+    private ingredients:Ingredient[] = [
+        new Ingredient("Apples", 7),
+        new Ingredient("Tomatoes", 3)
     ];
 
-    getIngridient(index: number) {
-        return this.ingridients[index];
+    getIngredient(index: number) {
+        return this.ingredients[index];
     }
 
-    getIngridients() {
-        return this.ingridients.slice();
+    getIngredients() {
+        return this.ingredients.slice();
     }
 
-    addIngridient(ingridient: Ingridient) {
-        this.ingridients.push(ingridient);
-        this.ingridientsChanged.next(this.ingridients.slice());
+    addIngredient(ingredient: Ingredient) {
+        this.ingredients.push(ingredient);
+        this.ingredientsChanged.next(this.ingredients.slice());
     }
 
-    addIngridients(ingridients: Ingridient[]) {
-        this.ingridients.push(...ingridients);
-        this.ingridientsChanged.next(this.ingridients.slice());
+    addIngredients(ingredients: Ingredient[]) {
+        this.ingredients.push(...ingredients);
+        this.ingredientsChanged.next(this.ingredients.slice());
     }
 
-    updateIngridient(ingridient: Ingridient, index: number) {
-        this.ingridients[index] = ingridient;
-        this.ingridientsChanged.next(this.ingridients.slice());
+    updateIngredient(ingredient: Ingredient, index: number) {
+        this.ingredients[index] = ingredient;
+        this.ingredientsChanged.next(this.ingredients.slice());
     }
 
-    deleteIngridient(index: number) {
-        this.ingridients.splice(index, 1);
-        this.ingridientsChanged.next(this.ingridients.slice());
+    deleteIngredient(index: number) {
+        this.ingredients.splice(index, 1);
+        this.ingredientsChanged.next(this.ingredients.slice());
     }
 }

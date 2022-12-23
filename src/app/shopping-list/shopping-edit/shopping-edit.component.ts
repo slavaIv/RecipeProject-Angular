@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ShoppingListService } from '../shopping-list.service';
 import { NgForm } from '@angular/forms';
-import { Ingridient } from 'src/app/shared/ingridient.model';
+import { Ingredient } from 'src/app/shared/ingredient.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -16,25 +16,25 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     editMode = false;
     editedNumberIndex: number;
-    editedItem: Ingridient;
+    editedItem: Ingredient;
 
     constructor(private shoppingListService: ShoppingListService) { }
 
     onAddItem(form: NgForm) {
         const value = form.value;
-        const newIngridient = new Ingridient(value.name, value.amount);
+        const newIngredient = new Ingredient(value.name, value.amount);
         if(this.editMode) {
-            this.shoppingListService.updateIngridient(newIngridient, this.editedNumberIndex);
+            this.shoppingListService.updateIngredient(newIngredient, this.editedNumberIndex);
         }
         else {
-            this.shoppingListService.addIngridient(newIngridient);
+            this.shoppingListService.addIngredient(newIngredient);
         }
         this.editMode = false;
         this.shForm.reset();
     }
 
     deleteItem() {
-        this.shoppingListService.deleteIngridient(this.editedNumberIndex);
+        this.shoppingListService.deleteIngredient(this.editedNumberIndex);
         this.clearForm();
     }
 
@@ -48,7 +48,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
             (index: number) => {
                 this.editedNumberIndex = index;
                 this.editMode = true;
-                this.editedItem = this.shoppingListService.getIngridient(index);              
+                this.editedItem = this.shoppingListService.getIngredient(index);              
                 this.shForm.setValue({
                     name: this.editedItem.name,
                     amount: this.editedItem.amount
